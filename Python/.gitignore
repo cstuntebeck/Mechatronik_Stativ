@@ -1,0 +1,15 @@
+# Virtuelle Umgebung
+Projekt.venv/
+
+# Python Caches
+__pycache__/
+*.pyc
+
+# Aider Dateien
+.aider*
+
+# macOS Systemdateien
+.DS_Store
+
+# VS Code Einstellungen (optional)
+.vscode/
