@@ -3,4 +3,8 @@
 **/Projekt.venv/
 **/__pycache__/
 **/.pio/
-**/.aider*
+**/Mechatronik_Stativ.code-workspace
+.vscode/
+**/build/
+**/dist/
+**/*.spec
