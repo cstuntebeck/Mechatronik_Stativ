@@ -1,0 +1,6 @@
+.DS_Store
+**/.venv/
+**/Projekt.venv/
+**/__pycache__/
+**/.pio/
+**/.aider*
