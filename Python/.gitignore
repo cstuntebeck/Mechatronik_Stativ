@@ -5,8 +5,6 @@ Projekt.venv/
 __pycache__/
 *.pyc
 
-# Aider Dateien
-.aider*
 
 # macOS Systemdateien
 .DS_Store

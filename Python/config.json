@@ -1,0 +1,26 @@
+{
+    "motor": {
+        "port": "/dev/cu.usbmodem11101",
+        "boundary_ol": {
+            "x": 0,
+            "y": -50
+        },
+        "boundary_or": {
+            "x": 150,
+            "y": -50
+        },
+        "boundary_ul": {
+            "x": -50,
+            "y": 150
+        },
+        "boundary_ur": {
+            "x": 150,
+            "y": 150
+        },
+        "fields_x": 3,
+        "fields_y": 3
+    },
+    "cs2000": {
+        "port": "MOCK"
+    }
+}
