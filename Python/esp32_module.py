@@ -68,11 +68,6 @@ class SerialWorker(QObject):
             print("[SerialWorker.send_motor_command] FEHLER: Keine Verbindung")
             return
 
-        # Versuche Lock zu bekommen, um Überschneidungen zu vermeiden
-        # WARNUNG: blocking=False führt dazu, dass Befehle verworfen werden, wenn der Worker busy ist!
-        # Für zuverlässige Sequenzen sollte hier blocking=True sein oder eine Queue verwendet werden.
-        # Da wir im Worker-Thread sind (via Signal/Slot Queue), ist blocking=True sicher,
-        # solange wir nicht auf uns selbst warten.
         if not self.serial_lock.acquire(blocking=True, timeout=5.0):
             print(f"[SerialWorker.send_motor_command] Busy / Lock Timeout...")
             self.response.emit(False, "Fehler: System ausgelastet", context)
@@ -889,8 +884,6 @@ class MotorSteuerung(QWidget):
 
         if self.comm_thread is None or not self.comm_thread.isRunning():
             print(f"[MotorSteuerung.move_steps] FEHLER: Keine Verbindung")
-            # Wir können hier keine GUI-Elemente direkt ändern, da dies aus einem
-            # anderen Thread aufgerufen werden könnte. Stattdessen loggen wir den Fehler.
             return
 
         print(f"[MotorSteuerung.move_steps] Sende Befehl für Achse '{achse}' mit {schritte} Schritten")
