@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-# pyright: basic
-# pyright: reportAttributeAccessIssue=false
-# pyright: reportIncompatibleMethodOverride=false
 
 """
 CS-2000 Spektralradiometer Mess-Modul
@@ -1639,15 +1635,6 @@ class CS2000GUI(QWidget):
              target_x_pos = int(interp_x[0])
              target_y_pos = int(interp_y[0])
              
-             # Offset für Mitte (optional, Schritte/Feld gelten nur lokal grob, vllt weglassen bei absoluter Pos? 
-             # Nein, wir interpolieren Raster-Eckpunkte. Wir wollen aber KASTEN-MITTE.
-             # Das Raster oben bezog sich auf Kasten-INDICES.
-             # Wenn wir (0,0) interpolieren, meinen wir die Position von Kasten 0,0. 
-             # Soll das die Ecke oben-links sein oder die Mitte?
-             # Bisher war "Begrenzung Oben Links" die LINKER OBERE ECKE des ersten Kastens? 
-             # Oder die Mitte? Meist Kalibriert man auf die Mitte des ersten Kastens.
-             # Angenommen, die Kalibrierpunkte SIND die Messpunkte (Mitten).
-             # Dann passt die Interpolation direkt.
              
         else:
             # Fallback Legacy Calculation
@@ -1657,22 +1644,7 @@ class CS2000GUI(QWidget):
             steps_y = self.motor_controller.schritte_pro_feld_y
             offset_x = steps_x // 2
             offset_y = steps_y // 2
-             # Alte Logik addierte Offset, weil Begrenzung als "Ecke" verstanden wurde? 
-             # In "MesstafelWorker.run" wurde delta zum Start berechnet und dann Offset zur Mitte.
-             # Wenn wir annehmen user speichert MITTE, dann kein Offset.
-             # Lassen wir Offset erstmal weg, wenn man auf Punkt fährt.
-             
-            # Legacy Target Calculation (ohne Offset hier für go_to_box, um konsistent mit Interpolation zu sein?)
-            # MOMENT: go_to_box (alt) hatte offset.
-            # "target_x_pos = start_x + (target_col * steps_x) + offset_x"
-            # Das heißt Begrenzung war linke obere Ecke.
-            
-            # Für Interpolation nehmen wir an, Korrekturpunkte sind die ZIELPUNKTE (Mitten).
-            # Auch die Ecken (Begrenzung) sind eigentlich Mitten der Eck-Kästen, wenn man es genau nimmt?
-            # Oder Ecken des Rasters.
-            # Um es einfach zu halten: Wir interpolieren das, was gespeichert wurde.
-            # Wenn User [0,0] korrigiert, speichert er die exakte Position für [0,0].
-            # Also interpolieren wir direkt zu Zielkoordinaten.
+
             
             target_x_pos = start_x + (target_col * steps_x) + offset_x
             target_y_pos = start_y + (target_row * steps_y) + offset_y
